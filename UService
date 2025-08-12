@@ -1,14 +1,14 @@
+
 import java.util.*;
 
 public class UService {
   // long型检验账号
   public static boolean isSame(long u1, long u2) {
-    if (u1 == u2) return true;
-    else return false;
+    return u1 == u2;
   }
-  //String型检验密码
- public static boolean isSame( String u1, String u2) {
-    if (u1 == u2) return true;
-    else return false;
+  
+  // String型检验密码
+  public static boolean isSame(String u1, String u2) {
+    return Objects.equals(u1, u2);
   }
 }
