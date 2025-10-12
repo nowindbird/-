@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>宠物乐园 - 登录</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4ade80', // 清新的绿色作为主色调，代表活力和自然
+                        secondary: '#3b82f6', // 蓝色作为辅助色，代表信任
+                        accent: '#f97316', // 橙色作为强调色，代表温暖和活力
+                        dark: '#1e293b',
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+            .bg-gradient-pet {
+                background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row">
+        <!-- 左侧图片区域 -->
+        <div class="w-full md:w-1/2 bg-gradient-to-br from-primary/90 to-secondary/90 p-8 md:p-12 flex flex-col justify-between relative overflow-hidden">
+            <!-- 装饰元素 -->
+            <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/20 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-60 h-60 bg-white/20 rounded-full blur-3xl"></div>
+            
+            <!-- 网站Logo和名称 -->
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fa fa-paw text-white text-3xl"></i>
+                    <h1 class="text-white text-2xl md:text-3xl font-bold text-shadow">宠物乐园</h1>
+                </div>
+                <p class="text-white/80 text-sm md:text-base">与您的爱宠共享美好时光</p>
+            </div>
+            
+            <!-- 主视觉图片 -->
+            <div class="relative z-10 my-8 flex justify-center">
+                <img src="https://picsum.photos/id/237/600/400" alt="快乐的狗狗和猫咪" class="rounded-xl shadow-lg w-full max-w-md transform hover:scale-105 transition-custom object-cover h-64 md:h-80">
+            </div>
+            
+            <!-- 左侧底部文字 -->
+            <div class="relative z-10 text-white">
+                <h2 class="text-xl md:text-2xl font-bold mb-2">欢迎回来</h2>
+                <p class="text-white/80">登录您的账户，继续探索宠物的奇妙世界</p>
+            </div>
+        </div>
+        
+        <!-- 右侧登录表单区域 -->
+        <div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+            <div class="mb-8">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-2">登录您的账户</h2>
+                <p class="text-gray-500">请输入您的账号信息以继续</p>
+            </div>
+            
+            <!-- 登录表单 -->
+            <form id="loginForm" class="space-y-5">
+                <!-- 邮箱/用户名输入 -->
+                <div class="space-y-2">
+                    <label for="username" class="block text-sm font-medium text-gray-700">用户名或邮箱</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa fa-user text-gray-400"></i>
+                        </div>
+                        <input type="text" id="username" name="username" required
+                            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none"
+                            placeholder="请输入用户名或邮箱">
+                    </div>
+                </div>
+                
+                <!-- 密码输入 -->
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label for="password" class="block text-sm font-medium text-gray-700">密码</label>
+                        <a href="#" class="text-sm text-secondary hover:text-secondary/80 transition-custom">忘记密码?</a>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fa fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required
+                            class="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom outline-none"
+                            placeholder="请输入密码">
+                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-custom">
+                            <i class="fa fa-eye-slash"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 记住我和登录按钮 -->
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" 
+                            class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-700">
+                            记住我的登录状态
+                        </label>
+                    </div>
+                    
+                    <button type="submit" 
+                        class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg transition-custom transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        登录
+                    </button>
+                </div>
+            </form>
+            
+            <!-- 分隔线 -->
+            <div class="relative my-6">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-200"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-500">或者使用以下方式登录</span>
+                </div>
+            </div>
+            
+            <!-- 社交登录选项 -->
+            <div class="grid grid-cols-3 gap-3">
+                <button class="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-custom">
+                    <i class="fa fa-weixin text-green-600 text-xl"></i>
+                </button>
+                <button class="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-custom">
+                    <i class="fa fa-qq text-blue-500 text-xl"></i>
+                </button>
+                <button class="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-custom">
+                    <i class="fa fa-weibo text-red-500 text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- 注册提示 -->
+            <div class="mt-8 text-center">
+                <p class="text-gray-600">
+                    还没有账户? 
+                    <a href="#" class="font-medium text-primary hover:text-primary/80 transition-custom">立即注册</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="mt-8 text-center text-gray-500 text-sm">
+        <p>© 2023 宠物乐园. 保留所有权利.</p>
+        <div class="flex justify-center space-x-4 mt-2">
+            <a href="#" class="hover:text-primary transition-custom">隐私政策</a>
+            <a href="#" class="hover:text-primary transition-custom">使用条款</a>
+            <a href="#" class="hover:text-primary transition-custom">帮助中心</a>
+        </div>
+    </footer>
+
+    <script>
+        // 密码显示/隐藏切换
+        const togglePassword = document.getElementById('togglePassword');
+        const password = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function() {
+            // 切换类型属性
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            
+            // 切换图标
+            this.querySelector('i').classList.toggle('fa-eye');
+            this.querySelector('i').classList.toggle('fa-eye-slash');
+        });
+        
+        // 表单提交处理
+        const loginForm = document.getElementById('loginForm');
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 简单的表单验证
+            if (!username || !password) {
+                alert('请输入用户名和密码');
+                return;
+            }
+            
+            // 模拟登录成功
+            alert(`登录成功！欢迎回来，${username}`);
+            
+            // 在实际应用中，这里会发送登录请求到服务器
+            // loginForm.submit();
+        });
+        
+        // 添加输入框聚焦动画效果
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('scale-[1.01]');
+                this.parentElement.style.transition = 'all 0.2s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+    </script>
+</body>
+</html>
